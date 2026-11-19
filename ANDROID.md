@@ -11,6 +11,8 @@
 
 This is a **release-signed sideload APK**, not a Play Store listing. It uses package `app.semesterdesk`, versionName from package.json and an increasing versionCode. A stable private signer lets later releases update it normally. An old debug APK has a different signer: back up first, uninstall only if Android requires it, install this release, then import and check the backup. Uninstalling deletes local app data.
 
+Backups, CSV, DOCX/Markdown, review reports and original files use Android's system save-file picker. Choose a destination and finish saving; cancelling does not report success. Non-image attachments offer a saved copy for opening in a reader. Resume Print/PDF opens Android's print dialog. Native OCR bundles a plain English model so Android asset packaging cannot rename its gzip request.
+
 The website, Windows connector and Android have separate storage. Migrating from the old hosted project also requires a complete backup. Keep the source copy until you verify records and original files on the destination.
 
 ## What release verification proves

@@ -33,12 +33,12 @@ export default function Pilot() {
   const history = selected ? data.reviews.filter(r => `${r.target_type}:${r.target_id}` === selected.key) : []
   const courseName = (id: string | null) => data.courses.find(c => c.id === id)?.code ?? 'Unassigned'
   const open = (target: Target) => { setError(''); setDraft({ target: structuredClone(target), verdict: 'needs_changes', checks: initialChecks(), issues: '' }) }
-  const exportReport = () => download(`semester-desk-quality-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({
+  const exportReport = async () => { try { await download(`semester-desk-quality-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({
     app: 'semester-desk', report_version: 1, exported_at: new Date().toISOString(),
     method: 'Manual student reviews. No automatic factual-accuracy certification. Contains reviewed content and source context; share deliberately.',
     items: data.targets.map(t => ({ type: t.type, id: t.id, title: t.snapshot.title, course: courseName(t.course), status: qualityStatus(t.snapshot, latest(t)), latest_review_id: latest(t)?.id ?? null })),
     reviews: data.reviews,
-  }, null, 2))
+  }, null, 2)) } catch { notify('Could not save the review report. Keep your data and retry.', 'crit') } }
 
   return <>
     <PageHeader eyebrow="Browser pilot" title="Quality reviews" lede="Check your real course notes and extracted text against the original material. Record what works and what needs correcting, entirely on this device." action={<Button onClick={exportReport}>Export review report</Button>} />

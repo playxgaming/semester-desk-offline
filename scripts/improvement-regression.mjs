@@ -39,6 +39,9 @@ try {
     }
   })
   await page.addScriptTag({ content: bundle.outputFiles[0].text })
+  // Export helpers now initialise the real Capacitor module. Apply the native
+  // alarm fixture after that initialisation, before invoking the scheduling API.
+  await page.evaluate(() => { globalThis.Capacitor.isNativePlatform = () => true })
   const results = await page.evaluate(async () => {
     const { db, put, defaultProfile, buildQuiz, advanceRecurring, importScan, undoScanImport, matchScanCourse, parseSyllabus, importSyllabus, undoSyllabus, saveApplication, moveApplication, applySchedule, exportJson, importJson, writeNoteDraft, saveNote } = Probe
     const check = (v, message) => { if (!v) throw new Error(message) }

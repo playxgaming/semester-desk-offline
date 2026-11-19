@@ -13,6 +13,8 @@ Tests use disposable profiles and synthetic material. No user's browser database
 
 Logs and `results.json` are under ignored `node_modules/.release-verification/`; CI archives them with synthetic audit screenshots. Lint and coverage are not configured, so a passing run is not a coverage claim.
 
+Native-export contract checks cover exact chunked Unicode, cancellation, cleanup, concurrent jobs and retry with an injected native transport. A real OCR job in simulated Android mode proves the plain language-model request. CI compiles the native bridge and checks its presence and the plain model inside the signed APK. Actual Android picker/print/reader interaction remains a physical-device acceptance check.
+
 ## Release gates
 
 1. TypeScript, production/PWA build and complete release regression runner.

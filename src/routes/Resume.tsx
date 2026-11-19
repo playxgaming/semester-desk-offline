@@ -4,6 +4,7 @@ import { Badge, Button, Card, Check, Empty, Field, Modal, Note, PageHeader, Pane
 import { useProfile, useResumeItems, useResumeVersions } from '@/hooks/data'
 import { buildResume, dateRange, ITEM_KINDS, resumeDocx, resumeMarkdown } from '@/lib/resume'
 import { download, downloadBytes } from '@/lib/backup'
+import { printCurrentPage } from '@/lib/exportFile'
 import { patch, put, remove } from '@/db/mutate'
 import { uid } from '@/lib/id'
 import type { ResumeItem, ResumeVersion } from '@/db/db'
@@ -304,26 +305,29 @@ export default function Resume() {
             {doc && version ? (
               <>
                 <div className="no-print mb-3 flex flex-wrap gap-2">
-                  <Button variant="primary" onClick={() => window.print()}>
+                  <Button variant="primary" onClick={() => void printCurrentPage().catch(() => notify('Printing is unavailable. Export DOCX instead.', 'crit'))}>
                     <Printer size={14} /> Print / PDF
                   </Button>
                   <Button
-                    onClick={() => {
+                    onClick={async () => {
+                      try {
                       const bytes = resumeDocx(doc, profile)
                       const safe = (version.target_role || version.name).replace(/[^\w-]+/g, '-')
-                      downloadBytes(
+                      const saved = await downloadBytes(
                         `${(profile.name || 'resume').replace(/\s+/g, '-')}-${safe}.docx`,
                         bytes,
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                       )
-                      notify('DOCX downloaded')
+                      if (saved) notify('DOCX downloaded')
+                      } catch { notify('Could not save DOCX. Keep your resume and retry.', 'crit') }
                     }}
                   >
                     <FileDown size={14} /> DOCX
                   </Button>
                   <Button
-                    onClick={() => {
-                      download(`${version.name.replace(/\s+/g, '-')}.md`, resumeMarkdown(doc, profile), 'text/markdown')
+                    onClick={async () => {
+                      try { await download(`${version.name.replace(/\s+/g, '-')}.md`, resumeMarkdown(doc, profile), 'text/markdown') }
+                      catch { notify('Could not save Markdown. Keep your resume and retry.', 'crit') }
                     }}
                   >
                     <FileDown size={14} /> Markdown

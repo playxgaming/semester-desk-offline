@@ -135,7 +135,8 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           grep "versionName='$VERSION'" out/package.txt
           unzip -l out/semester-desk.apk | grep 'assets/public/index.html'
-          unzip -l out/semester-desk.apk | grep 'assets/public/ocr/lang/eng.traineddata.gz'
+          unzip -l out/semester-desk.apk | grep 'assets/public/ocr/lang/eng.traineddata$'
+          unzip -p out/semester-desk.apk classes.dex | grep -a 'DeskExport' > /dev/null
           git archive --format=zip HEAD -o out/semester-desk-source.zip
           (cd out && sha256sum semester-desk.apk semester-desk-source.zip > SHA256SUMS.txt)
       - uses: actions/upload-artifact@v7

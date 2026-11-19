@@ -1,4 +1,5 @@
 import { createWorker } from 'tesseract.js'
+import { Capacitor } from '@capacitor/core'
 import { visitPdfImages } from './pdf'
 import { adjustImage } from './images'
 let active = false
@@ -8,7 +9,7 @@ export async function readLocalText(file: File, signal?: AbortSignal, progress?:
   if (!['application/pdf', 'image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 25 * 1024 * 1024) throw new Error('Choose a PDF, PNG, JPEG or WebP up to 25 MB.')
   active = true
   const assets = new URL(`${import.meta.env.BASE_URL}ocr/`, document.baseURI).href
-  const pending = createWorker('eng', 1, { workerPath: `${assets}worker.min.js`, corePath: `${assets}core`, langPath: `${assets}lang`, workerBlobURL: false, cacheMethod: 'none', logger: message => progress?.(`${message.status} ${Math.round(message.progress * 100)}%`) })
+  const pending = createWorker('eng', 1, { workerPath: `${assets}worker.min.js`, corePath: `${assets}core`, langPath: `${assets}lang`, gzip: Capacitor.getPlatform() !== 'android', workerBlobURL: false, cacheMethod: 'none', logger: message => progress?.(`${message.status} ${Math.round(message.progress * 100)}%`) })
   let worker: Awaited<typeof pending> | undefined
   let cancel: () => void = () => {}
   const cancelled = new Promise<never>((_, reject) => { cancel = () => reject(new DOMException('Cancelled', 'AbortError')) })

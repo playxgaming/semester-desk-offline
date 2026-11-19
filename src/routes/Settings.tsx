@@ -486,8 +486,7 @@ export default function Settings() {
                 setBackupBusy(true)
                 try {
                   const b = await exportJson()
-                  download(`semester-desk-${b.exported_at.slice(0, 10)}.json`, JSON.stringify(b, null, 2))
-                  notify(`Backup downloaded with ${b.blobs.length} attached files`)
+                  if (await download(`semester-desk-${b.exported_at.slice(0, 10)}.json`, JSON.stringify(b, null, 2))) notify(`Backup downloaded with ${b.blobs.length} attached files`)
                 } catch (error) { notify(error instanceof Error ? error.message : 'Could not export your backup. Please try again.', 'crit') }
                 finally { setBackupBusy(false) }
               }}
@@ -500,8 +499,7 @@ export default function Settings() {
                 setBackupBusy(true)
                 try {
                   const csv = await exportCsvBundle()
-                  download(`semester-desk-${new Date().toISOString().slice(0, 10)}.csv`, csv, 'text/csv')
-                  notify('CSV downloaded')
+                  if (await download(`semester-desk-${new Date().toISOString().slice(0, 10)}.csv`, csv, 'text/csv')) notify('CSV downloaded')
                 } catch { notify('Could not export CSV. Please try again.', 'crit') }
                 finally { setBackupBusy(false) }
               }}

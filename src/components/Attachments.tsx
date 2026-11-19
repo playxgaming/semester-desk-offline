@@ -15,6 +15,9 @@ import {
 } from '@/db/files'
 import { tap } from '@/lib/haptics'
 import { useUi } from '@/store/ui'
+import { Capacitor } from '@capacitor/core'
+import { exportBlob } from '@/lib/exportFile'
+import { readFile } from '@/db/files'
 
 /**
  * Files attached to a course or a deadline — the resource bank.
@@ -67,6 +70,14 @@ export function Attachments({
   }
 
   async function open(a: Attachment) {
+    if (Capacitor.getPlatform() === 'android' && !isImage(a)) {
+      try {
+        const blob = await readFile(a)
+        if (!blob) throw new Error('The file is missing. Restore its complete backup.')
+        await exportBlob(a.name, blob)
+      } catch (error) { notify(error instanceof Error ? error.message : 'Could not save a copy of this file.', 'crit') }
+      return
+    }
     const url = await fileUrl(a)
     if (!url) {
       notify('The file could not be read back — it may have been cleared.', 'crit')
@@ -137,7 +148,7 @@ export function Attachments({
               </button>
               <button
                 type="button"
-                aria-label={`Open ${f.name}`}
+                aria-label={`${Capacitor.getPlatform() === 'android' && !isImage(f) ? 'Save a copy of' : 'Open'} ${f.name}`}
                 className="icon-btn"
                 onClick={() => void open(f)}
               >

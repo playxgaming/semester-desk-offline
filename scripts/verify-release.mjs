@@ -45,7 +45,7 @@ try {
   await run('Calculators', [resolve(output, 'calculators.cjs')])
   await run('AI server contracts', ['--test', 'server/test.mjs'])
   await run('ChatGPT bridge contracts', ['--test', 'scripts/chatgpt-local/test.mjs'])
-  for (const script of ['render-recovery-test', 'planner-reminder-regression', 'backup-regression', 'offline-data-regression', 'improvement-regression', 'ai-notes-data-test', 'notes-quality-eval', 'remaining-milestones-data-test', 'quality-reviews-data-test']) await run(script, [`scripts/${script}.mjs`])
+  for (const script of ['render-recovery-test', 'planner-reminder-regression', 'backup-regression', 'offline-data-regression', 'improvement-regression', 'ai-notes-data-test', 'notes-quality-eval', 'remaining-milestones-data-test', 'quality-reviews-data-test', 'native-export-test', 'native-ocr-test']) await run(script, [`scripts/${script}.mjs`])
   if (!core) {
     await startServer(5173, false); await startServer(4173, true)
     const scripts = [

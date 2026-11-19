@@ -140,6 +140,8 @@ Search and Trash searches full local text across sources, notes/drafts, cards, q
 
 **Settings → Export JSON** creates the portable backup with records, attachment bytes and integrity hashes. CSV is readable record data and excludes file bytes. Save the JSON outside browser storage.
 
+On Android, exports open the system save-file picker. Choose a location and complete it; cancelling keeps app data unchanged and does not claim a successful backup. DOCX, Markdown, review reports and original-file copies use the same picker. Non-image resource files can be saved for a separate reader; Resume Print/PDF uses Android's print dialog.
+
 To migrate: export from the source; open the destination; choose Import; inspect counts/conflicts; choose **Keep matching device records** or explicitly **Replace matching records**; confirm; check restored notes, files and schedules. Cancel makes no changes. A record edited after preview requires a fresh preview. Keep the old copy until verified.
 
 Clearing site data, uninstalling an APK or resetting the app deletes its local database. Website, Android, development ports and the Windows connector have separate storage. However, the old and new GitHub Pages repository paths both use `https://playxgaming.github.io` and the same database name: within the same browser profile they share records and an additive database upgrade. Back up before the first new-site visit and use the latest build after upgrading; avoid editing shared records with the older app. A different browser profile is needed for an independent pilot. Other devices/origins require complete backup/import to transfer data.

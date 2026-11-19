@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.1
+
+- Android exports use the system save-file picker for backups, CSV, DOCX, Markdown, quality reports and original source files, with bounded transfer chunks and explicit cancellation/error handling.
+- Android resume printing opens the native print dialog; non-image attachments can be saved as a copy through the file picker.
+- Native OCR ships a deliberate uncompressed English language model so Android asset packaging cannot change its requested filename. Browser OCR retains the smaller gzip model.
+- Added native-export transport and plain-language-model OCR regression checks; release packaging checks include the native bridge and language asset.
+
 ## 3.0.0
 
 - Offline-first core with complete portable backups, conflict-previewed restore and full-content Search/Trash.

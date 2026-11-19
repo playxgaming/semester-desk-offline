@@ -1,4 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
+import { unlink } from 'node:fs/promises'
+import { gunzipSync } from 'node:zlib'
 
 // CLI 7 includes patched archive handling. This app deliberately keeps its
 // Capacitor 6 native runtime, Gradle and JDK 17 rather than migrating the APK.
@@ -16,3 +19,12 @@ for (const path of ['android/app/capacitor.build.gradle', 'android/capacitor-cor
   await writeFile(file, output)
 }
 console.log(`Android generated projects match Capacitor 6: Java 17, AGP ${agp}`)
+// Android asset packaging can strip .gz suffixes. Ship a deliberate plain model
+// for native OCR; the website keeps its smaller gzip model and browser cache.
+const compressed = new URL('../android/app/src/main/assets/public/ocr/lang/eng.traineddata.gz', import.meta.url)
+if (existsSync(compressed)) {
+  const model = gunzipSync(await readFile(compressed))
+  await writeFile(new URL('./eng.traineddata', compressed), model)
+  await unlink(compressed)
+  console.log(`Android OCR model prepared without gzip (${model.byteLength} bytes).`)
+}

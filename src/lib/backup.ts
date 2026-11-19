@@ -4,6 +4,7 @@ import { MAX_FILE_BYTES } from '@/db/files'
 import { validNoteProvenance } from '../../server/shared/ai-notes.mjs'
 import { validWindows } from './availability'
 import { validQualityReview } from './quality'
+import { exportBlob } from './exportFile'
 
 /**
  * Your data is yours: one file, every table, readable without the app and
@@ -83,16 +84,7 @@ export async function exportJson(): Promise<Backup> {
 }
 
 export function download(name: string, content: string, type = 'application/json') {
-  const url = URL.createObjectURL(new Blob([content], { type }))
-  const a = document.createElement('a')
-  a.href = url
-  a.download = name
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  // Keep the Blob alive while the browser hands the download to the OS.
-  // Immediate/one-second revocation can cancel downloads on a busy device.
-  setTimeout(() => URL.revokeObjectURL(url), 60_000)
+  return exportBlob(name, new Blob([content], { type }))
 }
 
 function toCsv(rows: Record<string, unknown>[]): string {
@@ -376,10 +368,5 @@ function validRow(table: DataTable, row: unknown): row is Record<string, unknown
 export function downloadBytes(name: string, bytes: Uint8Array, type: string) {
   const buffer = new ArrayBuffer(bytes.byteLength)
   new Uint8Array(buffer).set(bytes)
-  const url = URL.createObjectURL(new Blob([buffer], { type }))
-  const a = document.createElement('a')
-  a.href = url
-  a.download = name
-  a.click()
-  setTimeout(() => URL.revokeObjectURL(url), 1000)
+  return exportBlob(name, new Blob([buffer], { type }))
 }

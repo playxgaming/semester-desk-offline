@@ -89,8 +89,7 @@ export function CommandPalette() {
         run: async () => {
           const { exportJson, download } = await import('@/lib/backup')
           const b = await exportJson()
-          download(`semester-desk-${b.exported_at.slice(0, 10)}.json`, JSON.stringify(b, null, 2))
-          notify('Backup downloaded')
+          if (await download(`semester-desk-${b.exported_at.slice(0, 10)}.json`, JSON.stringify(b, null, 2))) notify('Backup downloaded')
         },
       },
       {

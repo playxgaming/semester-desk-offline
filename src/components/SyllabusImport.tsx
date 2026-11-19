@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { exportBlob } from '@/lib/exportFile'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Button, Field, Modal, Note, Row, TextArea } from './ui'
 import { db, type CourseDocument } from '@/db/db'
@@ -53,9 +54,7 @@ export function SyllabusImport({ courseId }: { courseId: string }) {
       const attachment = doc.attachment_id ? await db.attachments.get(doc.attachment_id) : undefined
       const blob = attachment && !attachment.deleted_at ? await readFile(attachment) : null
       if (!attachment || !blob) throw new Error('The original PDF is no longer on this device. Restore its complete backup.')
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a'); link.href = url; link.download = attachment.name; link.click()
-      setTimeout(() => URL.revokeObjectURL(url), 60_000)
+      await exportBlob(attachment.name, blob)
     } catch (e) { notify(e instanceof Error ? e.message : 'Could not open the original PDF', 'crit') }
   }
   async function commit() {
