@@ -1,6 +1,6 @@
 <p align="center"><img src="docs/images/zenith-banner.svg" alt="Semester Desk — your semester, under control. Created by Sarvesh Sehra." width="100%"></p>
 
-<p align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><strong>Launch web app ↗</strong></a> · <a href="https://github.com/playxgaming/semester-desk-offline/releases/latest/download/semester-desk.apk"><strong>Get Android APK ↗</strong></a> · <a href="docs/USER_GUIDE.md"><strong>Field manual</strong></a> · <a href="docs/pitch/Zenith-Semester-Desk-Pitch.pptx"><strong>Pitch deck ↓</strong></a></p>
+<p align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><strong>Launch web app ↗</strong></a> · <a href="https://github.com/playxgaming/semester-desk-offline/releases/latest/download/semester-desk.apk"><strong>Get Android APK ↗</strong></a> · <a href="docs/USER_GUIDE.md"><strong>Field manual</strong></a> · <a href="LICENSE"><strong>Usage &amp; permissions</strong></a></p>
 
 <p align="center"><a href="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml"><img alt="Release verification" src="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml/badge.svg"></a> <img alt="Version 3.0.2" src="https://img.shields.io/badge/version-3.0.2-27654b"> <img alt="Offline first" src="https://img.shields.io/badge/offline-first-3e785d"> <img alt="Web and Android" src="https://img.shields.io/badge/web_%2B-Android-4b70a1"> <img alt="No account required" src="https://img.shields.io/badge/account-not_required-80612b"></p>
 
@@ -48,14 +48,6 @@ Screenshots show a disposable demo profile, not real student records or live AI 
 <tr><td align="center"><a href="https://github.com/playxgaming/semester-desk-offline"><img src="docs/images/qr/repository.png" width="170" alt="QR: GitHub repository"></a></td><td align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><img src="docs/images/qr/website.png" width="170" alt="QR: open the website"></a></td><td align="center"><a href="https://github.com/playxgaming/semester-desk-offline/releases/latest/download/semester-desk.apk"><img src="docs/images/qr/android.png" width="170" alt="QR: download the latest signed APK"></a></td></tr>
 <tr><td align="center">Source + usage guide</td><td align="center">Open in your browser</td><td align="center">Latest signed download</td></tr>
 </table>
-
-### The product pitch
-
-[![Preview of the Semester Desk pitch cover](docs/pitch/cover.png)](docs/pitch/Zenith-Semester-Desk-Pitch.pptx)
-
-**[Download the 17-slide PowerPoint](docs/pitch/Zenith-Semester-Desk-Pitch.pptx)** · [Presenter guide](docs/pitch/README.md) · [Data and sources](docs/pitch/SOURCES.md)
-
-Real app screenshots, editable workflow diagrams, measured release data and three QR destinations. The Team ZENITH roster is included in the presentation. Pilot proposals are labelled; no adoption or learning gains are claimed.
 
 ## What is included
 
@@ -145,6 +137,14 @@ docs/                 Illustrated guide, screenshots, testing and architecture
 ```
 
 React · TypeScript · Vite · Tailwind · Dexie · Capacitor · KaTeX · PDF.js · Tesseract.js. Upstream dependencies retain their respective licences; generated offline assets retain upstream notices.
+
+## Copyright and permissions
+
+**Copyright © 2026 Sarvesh Sehra. All rights reserved in the original work.**
+
+Semester Desk is **source-available under custom personal-use terms**, not an open-source licence. You may use the app for your own study and inspect or privately test the source under the [licence](LICENSE). Reuse, redistribution, commercial use, and submission of the original code or assets in another hackathon, competition or portfolio require prior written permission. Attribution alone does not grant permission. Do not remove copyright notices or present this project as your own work.
+
+Third-party components retain their own licences. GitHub's platform permissions and rights required by law are unaffected. [Copyright, scope and permission requests →](COPYRIGHT.md)
 
 ## Help and contributions
 

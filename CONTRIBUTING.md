@@ -1,5 +1,7 @@
 # Contributing
 
+Read the [custom personal-use licence](LICENSE) before reusing code or submitting changes. Public source access is not a general reuse grant. Ask about permission for a proposed contribution before sending code; no ownership transfer or additional contributor licence is implied by this guide. Bug reports and synthetic reproduction steps are welcome.
+
 Use Node.js 22.13+, install root/server dependencies and run `npm run verify`. Read [architecture](docs/ARCHITECTURE.md) and [testing](docs/TESTING.md).
 
 - Preserve offline core use, drafts/history and existing data through migrations.

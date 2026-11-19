@@ -1,0 +1,59 @@
+SEMESTER DESK PERSONAL-USE AND SOURCE-AVAILABLE LICENCE
+Version 1.0 — 19 November 2026
+
+Copyright (c) 2026 Sarvesh Sehra.
+All rights reserved in the original work, except as expressly permitted below.
+
+1. SCOPE
+These terms apply to the original Semester Desk code, documentation, graphics
+and other materials in this repository to the extent that Sarvesh Sehra owns
+the applicable rights (the "Original Materials"). They do not claim ownership
+of third-party components, third-party materials, or contributions owned by
+others. Those materials remain subject to their respective licences and rights.
+An existing licence or permission for third-party material is not revoked by
+this document. This is a custom source-available licence, not an open-source
+licence.
+
+2. LIMITED PERSONAL-USE PERMISSION
+You may use the published Semester Desk app for your own personal study.
+You may read the Original Materials and make a private local copy solely to
+inspect, evaluate, build, test or modify the app for your own non-commercial
+personal use. Keep all copyright, attribution and licence notices with such
+copies. These permissions do not include publishing or distributing your
+modifications or using the Original Materials in another project.
+
+3. REUSE AND COMPETITION RESTRICTIONS
+Without prior written permission from the relevant rights holder, you may not:
+(a) redistribute, publish, sell, sublicense or commercially exploit the Original
+    Materials or a derivative work, except as expressly allowed in section 5;
+(b) incorporate the Original Materials into another distributed product,
+    service, template, portfolio or project;
+(c) submit the Original Materials, a modified copy, or a substantially copied
+    derivative as your own work or another team's work in a hackathon,
+    competition, assignment, assessment or similar event;
+(d) remove or obscure copyright or licence notices or misrepresent authorship.
+Giving credit does not by itself grant permission for these uses. Permission
+must cover the intended use and any event-specific submission requirements.
+
+4. PERMISSION REQUESTS
+Request permission through the repository's Issues page, describing the
+material and intended use. An unanswered request is not permission. Do not
+include personal data or secrets in a public issue. An explicit written grant
+may provide additional rights on its stated terms.
+
+5. PLATFORM AND LEGAL RIGHTS
+Nothing here limits rights that cannot be restricted under applicable law,
+rights already granted under another applicable licence, or permissions
+necessarily granted to GitHub and its users under GitHub's Terms of Service,
+including platform viewing and forking rights. A platform fork does not by
+itself grant permission for unrelated redistribution or competition reuse.
+
+6. NO WARRANTY
+To the extent permitted by applicable law, the Original Materials are provided
+"AS IS", without warranty of any kind. To that extent, the rights holders are
+not liable for claims or damages arising from their use. Nothing in this
+section excludes liability that applicable law does not permit to be excluded.
+
+7. RESERVED RIGHTS
+Rights not expressly granted are reserved by their respective rights holders.
+This licence does not grant rights to third-party names, marks or content.

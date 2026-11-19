@@ -1,6 +1,7 @@
 {
   "name": "semester-desk-ai-server",
   "version": "1.0.0",
+  "license": "SEE LICENSE IN ../LICENSE",
   "description": "AI proxy server for Semester Desk",
   "main": "index.js",
   "type": "module",
