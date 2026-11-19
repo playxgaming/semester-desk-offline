@@ -42,7 +42,7 @@ Screenshots show a disposable demo profile, not real student records or live AI 
 
 Let the website cache its assets once; **Install app** shows readiness. The APK bundles offline assets. Install the PWA from Chrome/Edge, or Safari → Share → Add to Home Screen on iPhone/iPad. On phones, **More** reveals all tools.
 
-> **Moving from the old site or APK?** Export a complete JSON backup there, import here and check it. A new website path has separate storage. Replacing an old debug-signed APK may require reinstalling, which deletes app data. [Migration and installation →](ANDROID.md)
+> **Moving from the old site or APK?** Export a complete JSON backup first. The old and new GitHub Pages sites share an origin and database name, so this site can retain and upgrade those existing records; use the latest build after upgrading. Other devices, profiles, local ports and Android need backup/import to transfer data. Replacing an old debug-signed APK may require reinstalling, which deletes app data. [Migration and installation →](ANDROID.md)
 
 ## Run locally
 

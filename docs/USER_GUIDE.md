@@ -22,7 +22,7 @@ On a phone, **More** opens the rest of the tools. The search/command button open
 
 ![The Today dashboard with demo courses and study work](images/today.png)
 
-Today brings together the current day's classes, attendance prompts, deadlines, study blocks and useful next actions. Academic percentages describe academic work; career deadlines are ranked separately. Open a listed item to change the underlying record. The app uses the timezone in your profile, so check it before entering deadlines.
+Today brings together the current day's classes, attendance prompts, deadlines, study blocks and useful next actions. Academic percentages describe academic work; career deadlines are ranked separately. Open a listed item to change the underlying record. Check your device timezone before entering deadlines; dates and alarms follow the device clock.
 
 ## Courses, syllabus and source material
 
@@ -142,7 +142,7 @@ Search and Trash searches full local text across sources, notes/drafts, cards, q
 
 To migrate: export from the source; open the destination; choose Import; inspect counts/conflicts; choose **Keep matching device records** or explicitly **Replace matching records**; confirm; check restored notes, files and schedules. Cancel makes no changes. A record edited after preview requires a fresh preview. Keep the old copy until verified.
 
-Clearing site data, uninstalling an APK or resetting the app deletes its local database. Website, Android, development ports and the Windows connector are separate origins. Moving to this new hosted repository does not automatically transfer data from the old website: use a complete backup.
+Clearing site data, uninstalling an APK or resetting the app deletes its local database. Website, Android, development ports and the Windows connector have separate storage. However, the old and new GitHub Pages repository paths both use `https://playxgaming.github.io` and the same database name: within the same browser profile they share records and an additive database upgrade. Back up before the first new-site visit and use the latest build after upgrading; avoid editing shared records with the older app. A different browser profile is needed for an independent pilot. Other devices/origins require complete backup/import to transfer data.
 
 ## Install, update and reminders
 

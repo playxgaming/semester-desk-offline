@@ -17,6 +17,8 @@ flowchart TD
 
 Database v6 contains 32 entity tables plus local blobs. Typed mutations stamp timestamps and announce changes after transaction completion. Soft deletes enable recovery. Related changes—imports, plan replacement, application stages/snapshots and quiz revision sessions—commit atomically.
 
+Browser storage is origin-scoped, not path-scoped. Both GitHub Pages repository paths on `https://playxgaming.github.io` use database `semester-desk` and share data/preferences within one browser profile. The v2-to-v6 migration is additive, but users should back up before upgrading and avoid using an older build against the upgraded database. Separate browser profiles or origins isolate pilots; local connector/dev ports and Android are separate installations.
+
 Note drafts are separate from published history. Generated notes preserve source excerpts/provider/model and structurally checked quotations. Quality reviews retain exact content/context; changes invalidate the current verdict while preserving prior snapshots.
 
 Portable backup v3 carries attachment bytes, sizes and SHA-256 hashes. Import validates before writes, previews conflicts and commits atomically. Record-only v2 imports remain supported, with missing-file limits reported. CSV excludes bytes.
