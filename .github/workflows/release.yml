@@ -44,6 +44,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: verification-${{ github.sha }}
+          include-hidden-files: true
           path: |
             node_modules/.release-verification/*.log
             node_modules/.release-verification/results.json

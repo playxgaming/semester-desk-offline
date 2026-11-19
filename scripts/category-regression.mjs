@@ -351,6 +351,7 @@ await step('Coach: weekly review, critique horizon, quiz complete, another round
   await button('Quiz me').click()
   await button('Start a 10-question quiz').click()
   for (let i = 0; i < 3; i++) {
+    await page.getByText(`${i + 1} / 3`, { exact: true }).waitFor()
     const reveal = button('Show the answer')
     if (await reveal.count()) {
       await reveal.click()
@@ -359,7 +360,8 @@ await step('Coach: weekly review, critique horizon, quiz complete, another round
     await page.getByRole('button', { name: /^(Next question|See the score)$/ }).click()
   }
   await button('Another round').click()
-  await page.getByRole('button', { name: 'Show the answer', exact: true }).count()
+  await button('Show the answer').waitFor()
+  assert.equal((await rows('quiz_attempts')).length, 2)
 })
 
 await step('Course archive hides dependent queues; restore and delete hides route', async () => {
