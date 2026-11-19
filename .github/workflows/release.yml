@@ -1,0 +1,164 @@
+name: Verify and release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix server
+      - name: Install isolated browser
+        run: npx playwright install --with-deps chromium
+      - name: Build and verify every release group
+        env:
+          VITE_AI_API_URL: ${{ vars.VITE_AI_API_URL }}
+        run: npm run verify
+      - name: Check production dependencies
+        run: |
+          npm audit --omit=dev
+          npm audit --omit=dev --prefix server
+      - name: Archive verification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: verification-${{ github.sha }}
+          path: |
+            node_modules/.release-verification/*.log
+            node_modules/.release-verification/results.json
+            shots/
+          retention-days: 14
+      - name: Prepare Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
+      - name: Stage website
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+      - name: Stage exact verified web assets for Android
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v7
+        with:
+          name: verified-web-${{ github.sha }}
+          path: dist/
+          retention-days: 7
+
+  website:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publish verified website
+        id: deploy
+        uses: actions/deploy-pages@v5
+
+  android:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: verified-web-${{ github.sha }}
+          path: dist/
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
+          log-accepted-android-sdk-licenses: false
+      - name: Sync exact verified web assets
+        run: npx cap sync android
+      - name: Assemble and verify signed Android release
+        env:
+          SD_KEYSTORE_BASE64: ${{ secrets.SD_KEYSTORE_BASE64 }}
+          SD_STORE_PASSWORD: ${{ secrets.SD_STORE_PASSWORD }}
+          SD_KEY_PASSWORD: ${{ secrets.SD_KEY_PASSWORD }}
+          SD_KEY_ALIAS: ${{ secrets.SD_KEY_ALIAS }}
+        run: |
+          set -euo pipefail
+          for name in SD_KEYSTORE_BASE64 SD_STORE_PASSWORD SD_KEY_PASSWORD SD_KEY_ALIAS; do
+            if [ -z "${!name}" ]; then echo "Missing signing secret: $name"; exit 1; fi
+          done
+          export SD_KEYSTORE_PATH="$RUNNER_TEMP/semester-desk-release.jks"
+          umask 077
+          printf '%s' "$SD_KEYSTORE_BASE64" | base64 --decode > "$SD_KEYSTORE_PATH"
+          trap 'rm -f "$SD_KEYSTORE_PATH"' EXIT
+          chmod +x android/gradlew
+          node scripts/android-build.mjs --release
+          mkdir -p out
+          cp android/app/build/outputs/apk/release/app-release.apk out/semester-desk.apk
+          "$ANDROID_HOME/build-tools/34.0.0/apksigner" verify --verbose --print-certs out/semester-desk.apk > out/signature.txt
+          "$ANDROID_HOME/build-tools/34.0.0/aapt" dump badging out/semester-desk.apk > out/package.txt
+          grep "package: name='app.semesterdesk'" out/package.txt
+          VERSION=$(node -p "require('./package.json').version")
+          grep "versionName='$VERSION'" out/package.txt
+          unzip -l out/semester-desk.apk | grep 'assets/public/index.html'
+          unzip -l out/semester-desk.apk | grep 'assets/public/ocr/lang/eng.traineddata.gz'
+          git archive --format=zip HEAD -o out/semester-desk-source.zip
+          (cd out && sha256sum semester-desk.apk semester-desk-source.zip > SHA256SUMS.txt)
+      - uses: actions/upload-artifact@v7
+        with:
+          name: semester-desk-signed-${{ github.sha }}
+          path: out/
+          retention-days: 30
+      - name: Publish Android download and source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          RELEASE_TAG="v$VERSION-build.$GITHUB_RUN_NUMBER"
+          cat > out/release-notes.md <<'NOTES'
+          ## Install
+          Download **semester-desk.apk** and open it on Android. Allow installation from your browser when Android prompts.
+
+          This APK uses a stable private release signer. It is a sideload release, not a Play Store listing. Export a complete JSON backup before replacing an old debug-signed build: a different signing key may require uninstalling the old app, which deletes its local data.
+
+          ## Included
+          Offline courses, attendance, grades, timed planning, notes and math, local English OCR, source-linked AI drafts, editable cards, saved quizzes, career tools, money, complete backups, quality reviews and an offline usage guide. Optional AI needs a configured provider/Windows connector and internet; local data never needs a remote database.
+
+          See the repository README and docs/USER_GUIDE.md for illustrated instructions. SHA256SUMS.txt checks download integrity; signature.txt and package.txt record APK verification. Physical-device alarms/install/upgrade and real-model factual accuracy still need your own acceptance checks.
+          NOTES
+          gh release create "$RELEASE_TAG" out/semester-desk.apk out/semester-desk-source.zip out/SHA256SUMS.txt out/signature.txt out/package.txt \
+            --target "$GITHUB_SHA" --title "Semester Desk $VERSION · build $GITHUB_RUN_NUMBER" --notes-file out/release-notes.md --latest

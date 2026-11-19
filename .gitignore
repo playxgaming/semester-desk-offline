@@ -1,0 +1,25 @@
+node_modules
+dist
+.env
+.env.local
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.local
+dev-dist
+shots/
+dependency-audit.json
+*-verification.log
+.DS_Store
+android/app/src/main/assets/public
+android/app/build
+android/.gradle
+android/build
+android/local.properties
+android/capacitor-cordova-android-plugins
+
+# Official ChatGPT SDK checkout is downloaded at a pinned revision by setup.
+/tools/chatgpt-devkit-source/
+/public/pdfjs/
+/public/ocr/

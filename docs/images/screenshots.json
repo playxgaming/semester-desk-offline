@@ -1,0 +1,46 @@
+{
+  "captured_at": "2026-11-19T06:56:28.160Z",
+  "data": "Disposable built-in demo semester. No user records or real AI output.",
+  "screenshots": [
+    {
+      "file": "today.png",
+      "route": "",
+      "caption": "Your day at a glance"
+    },
+    {
+      "file": "timetable.png",
+      "route": "timetable",
+      "caption": "Weekly classes"
+    },
+    {
+      "file": "planner.png",
+      "route": "planner",
+      "caption": "Study planning"
+    },
+    {
+      "file": "notes.png",
+      "route": "notes",
+      "caption": "Notes and rendered equations"
+    },
+    {
+      "file": "coach.png",
+      "route": "coach",
+      "caption": "Review and practice"
+    },
+    {
+      "file": "quality.png",
+      "route": "pilot",
+      "caption": "Manual quality reviews"
+    },
+    {
+      "file": "money.png",
+      "route": "money",
+      "caption": "Student budgets"
+    },
+    {
+      "file": "guide.png",
+      "route": "help",
+      "caption": "Offline usage guide"
+    }
+  ]
+}
