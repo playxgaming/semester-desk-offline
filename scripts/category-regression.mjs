@@ -47,6 +47,11 @@ const waitRow = async (table, predicate) => {
 }
 
 await go('courses')
+// A cold dev server can finish loading before the async demo seed finishes.
+// Wait for the app's setup screen before replacing data in this disposable profile.
+const setup = page.getByRole('dialog', { name: 'Set up Semester Desk', exact: true })
+await setup.getByRole('button', { name: 'Skip', exact: true }).click()
+await setup.waitFor({ state: 'hidden' })
 await page.evaluate(async () => {
   const { db } = await import('/src/db/db.ts')
   const { saveProfile } = await import('/src/db/mutate.ts')
