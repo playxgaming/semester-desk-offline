@@ -93,6 +93,10 @@ try {
   await page.goto(`${base}/#/coach`); await page.getByRole('button', { name: 'Quiz me', exact: true }).click()
   await page.getByLabel('Deck').selectOption('pilot-course'); await page.getByRole('button', { name: 'Start a 10-question quiz', exact: true }).click()
   await page.getByRole('button', { name: 'Show the answer', exact: true }).click(); await page.getByRole('button', { name: 'I did not', exact: true }).click(); await page.getByRole('button', { name: 'Next question', exact: true }).click()
+  // Reload after the UI confirms the async checkpoint, rather than interrupting
+  // its transaction and legitimately resuming the previously answered question.
+  await page.getByText('2 / 2', { exact: true }).waitFor()
+  assert.equal((await rows('quiz_attempts'))[0].position, 1)
   await page.reload(); await page.getByRole('button', { name: 'Quiz me', exact: true }).click()
   await page.locator('summary').filter({ hasText: /unfinished/ }).click(); await page.getByRole('button', { name: 'Resume unfinished quiz', exact: true }).click()
   await page.getByRole('button', { name: 'Show the answer', exact: true }).click(); await page.getByRole('button', { name: 'I had it', exact: true }).click(); await page.getByRole('button', { name: 'See the score', exact: true }).click()
