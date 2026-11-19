@@ -1,6 +1,6 @@
-<p align="center"><img src="docs/images/banner.svg" alt="Semester Desk — your semester, on your terms" width="100%"></p>
+<p align="center"><img src="docs/images/zenith-banner.svg" alt="Semester Desk — your semester, under control. Created by Sarvesh Sehra." width="100%"></p>
 
-<p align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><strong>Open the app ↗</strong></a> · <a href="https://github.com/playxgaming/semester-desk-offline/releases/latest"><strong>Download Android ↗</strong></a> · <a href="docs/USER_GUIDE.md"><strong>Full usage guide</strong></a></p>
+<p align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><strong>Launch web app ↗</strong></a> · <a href="https://github.com/playxgaming/semester-desk-offline/releases/latest/download/semester-desk.apk"><strong>Get Android APK ↗</strong></a> · <a href="docs/USER_GUIDE.md"><strong>Field manual</strong></a> · <a href="docs/pitch/Zenith-Semester-Desk-Pitch.pptx"><strong>Pitch deck ↓</strong></a></p>
 
 <p align="center"><a href="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml"><img alt="Release verification" src="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml/badge.svg"></a> <img alt="Version 3.0.2" src="https://img.shields.io/badge/version-3.0.2-27654b"> <img alt="Offline first" src="https://img.shields.io/badge/offline-first-3e785d"> <img alt="Web and Android" src="https://img.shields.io/badge/web_%2B-Android-4b70a1"> <img alt="No account required" src="https://img.shields.io/badge/account-not_required-80612b"></p>
 
@@ -8,7 +8,29 @@
 
 AI is optional. Local English OCR, flashcards, quizzes, calculations and planning work without a model. Connected AI sends only explicitly selected requests and context through your chosen connection.
 
-## A quick look
+## Your semester, from capture to completion
+
+```mermaid
+flowchart LR
+    A["01 · Capture<br/>Syllabus / PDF / timetable photo"] --> B["02 · Review<br/>Topics, sources and conflicts"]
+    B --> C["03 · Plan<br/>Real time, real deadlines"]
+    C --> D["04 · Learn<br/>Notes → cards → quizzes"]
+    D --> E["05 · Recover<br/>Catch-up, reviews and backup"]
+    style A fill:#102d23,stroke:#b4f875,color:#edf5ee
+    style B fill:#102d23,stroke:#b4f875,color:#edf5ee
+    style C fill:#102d23,stroke:#b4f875,color:#edf5ee
+    style D fill:#102d23,stroke:#b4f875,color:#edf5ee
+    style E fill:#102d23,stroke:#b4f875,color:#edf5ee
+```
+
+| Mission | What you can do | Open the guide |
+| :--- | :--- | :--- |
+| **Take command of the week** | Review your timetable, check attendance and see deadlines together. | [Academic tools](docs/USER_GUIDE.md) |
+| **Turn sources into understanding** | Import a syllabus, review OCR, write notes and practise with cards and quizzes. | [Learning workflow](docs/USER_GUIDE.md) |
+| **Make the plan survivable** | Preview realistic study time, inspect overload and recover missed work. | [Planning and Focus](docs/USER_GUIDE.md) |
+| **Keep ownership** | Use core tools offline and export complete backups with original files. | [Backup and restore](docs/USER_GUIDE.md) |
+
+## Inside mission control
 
 ![Today dashboard with the built-in demo semester](docs/images/today.png)
 
@@ -18,6 +40,22 @@ AI is optional. Local English OCR, flashcards, quizzes, calculations and plannin
 </table>
 
 Screenshots show a disposable demo profile, not real student records or live AI output. [Full illustrated guide →](docs/USER_GUIDE.md)
+
+## Scan your next step
+
+<table>
+<tr><th>Repository</th><th>Web app</th><th>Android APK</th></tr>
+<tr><td align="center"><a href="https://github.com/playxgaming/semester-desk-offline"><img src="docs/images/qr/repository.png" width="170" alt="QR: GitHub repository"></a></td><td align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><img src="docs/images/qr/website.png" width="170" alt="QR: open the website"></a></td><td align="center"><a href="https://github.com/playxgaming/semester-desk-offline/releases/latest/download/semester-desk.apk"><img src="docs/images/qr/android.png" width="170" alt="QR: download the latest signed APK"></a></td></tr>
+<tr><td align="center">Source + usage guide</td><td align="center">Open in your browser</td><td align="center">Latest signed download</td></tr>
+</table>
+
+### The product pitch
+
+[![Preview of the Semester Desk pitch cover](docs/pitch/cover.png)](docs/pitch/Zenith-Semester-Desk-Pitch.pptx)
+
+**[Download the 17-slide PowerPoint](docs/pitch/Zenith-Semester-Desk-Pitch.pptx)** · [Presenter guide](docs/pitch/README.md) · [Data and sources](docs/pitch/SOURCES.md)
+
+Real app screenshots, editable workflow diagrams, measured release data and three QR destinations. The Team ZENITH roster is included in the presentation. Pilot proposals are labelled; no adoption or learning gains are claimed.
 
 ## What is included
 
@@ -113,3 +151,7 @@ React · TypeScript · Vite · Tailwind · Dexie · Capacitor · KaTeX · PDF.js
 [Usage guide](docs/USER_GUIDE.md) · [Troubleshooting](docs/USER_GUIDE.md#troubleshooting) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
 
 Report the visible version, affected tool, steps and a minimal synthetic example. Remove personal data, provider credentials and sign-in material from reports and screenshots.
+
+---
+
+<p align="center"><strong>Created by Sarvesh Sehra</strong><br><sub>Build your semester. Keep your data. Own the next step.</sub></p>

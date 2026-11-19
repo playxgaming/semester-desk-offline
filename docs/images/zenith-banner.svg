@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Semester Desk — your semester, under control</title>
+  <desc id="desc">A dark mission control inspired header for the offline student workspace. Created by Sarvesh Sehra.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#091815"/><stop offset="1" stop-color="#15392e"/></linearGradient><pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse"><path d="M 64 0 L 0 0 0 64" fill="none" stroke="#b4f875" stroke-opacity=".065"/></pattern></defs>
+  <rect width="1600" height="560" fill="url(#bg)"/><rect width="1600" height="560" fill="url(#grid)"/>
+  <g fill="none" stroke="#b4f875" stroke-opacity=".25"><circle cx="1395" cy="260" r="210"/><circle cx="1395" cy="260" r="160"/><path d="M1120 260h480M1395 0v540"/></g>
+  <path d="M1300 338l95-177 95 177h-48l-47-89-47 89z" fill="#b4f875"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="80" y="82" font-size="20" letter-spacing="5" fill="#b4f875">SEMESTER OPERATIONS / OFFLINE FIRST</text>
+    <text x="76" y="205" font-size="98" font-weight="700" letter-spacing="-4" fill="#edf5ee">Semester Desk</text>
+    <text x="81" y="275" font-size="36" fill="#bdd3c7">Your semester. Under control.</text>
+    <text x="82" y="350" font-size="23" fill="#edf5ee">CLASSES  /  NOTES  /  REVISION  /  STUDENT LIFE</text>
+    <path d="M82 395h1050" stroke="#8aac98" stroke-opacity=".4"/>
+    <text x="82" y="445" font-size="20" fill="#b4f875">LOCAL DATA</text><text x="300" y="445" font-size="20" fill="#b4f875">WEB + ANDROID</text><text x="585" y="445" font-size="20" fill="#b4f875">NO ACCOUNT REQUIRED</text>
+    <text x="82" y="510" font-size="21" fill="#bdd3c7">Created by Sarvesh Sehra</text>
+  </g>
+</svg>
