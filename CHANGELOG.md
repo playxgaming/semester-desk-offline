@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.2
+
+- Offline installation retries interrupted downloads up to three times, reusing already cached files. Install exposes a visible retry action instead of remaining indefinitely in preparation after a failed download.
+- Ships one portable OCR engine instead of three variants, reducing the initial offline payload while retaining local printed-English recognition. Native exports and signing remain unchanged.
+
 ## 3.0.1
 
 - Android exports use the system save-file picker for backups, CSV, DOCX, Markdown, quality reports and original source files, with bounded transfer chunks and explicit cancellation/error handling.

@@ -27,7 +27,7 @@ For the Windows ChatGPT connection, follow CHATGPT_CONNECTION.md. Open its local
 
 For optional Gemini/Groq hosting, follow AI_SETUP.md. Provider secrets belong only in the backend environment, never in frontend variables or chat. Public shared AI hosting still needs access controls and spending limits; keep owner-funded endpoints private until hardened.
 
-The scanner offers optional Gemini image AI and bundled local English OCR. Local recognition, crop/rotation and reviewed/manual timetable rows need no API key; install/load the production app's offline assets first (about 21 MiB for app, PDF and OCR support). Review all recognized text and extracted rows. Holiday import is optional, and holidays can also be entered manually.
+The scanner offers optional Gemini image AI and bundled local English OCR. Local recognition, crop/rotation and reviewed/manual timetable rows need no API key; install/load the production app's offline assets first (about 14 MiB for app, PDF and OCR support). Review all recognized text and extracted rows. Holiday import is optional, and holidays can also be entered manually.
 
 ## New browser tools
 

@@ -15,6 +15,8 @@ Logs and `results.json` are under ignored `node_modules/.release-verification/`;
 
 Native-export contract checks cover exact chunked Unicode, cancellation, cleanup, concurrent jobs and retry with an injected native transport. A real OCR job in simulated Android mode proves the plain language-model request. CI compiles the native bridge and checks its presence and the plain model inside the signed APK. Actual Android picker/print/reader interaction remains a physical-device acceptance check.
 
+Offline-installer checks cover interrupted/stalled downloads, bounded retries, a visible manual retry action, recovery and reuse of an existing activated cache when update checks fail. Public hosting smoke checks also verify the real repository-path cache and local OCR after installation.
+
 ## Release gates
 
 1. TypeScript, production/PWA build and complete release regression runner.

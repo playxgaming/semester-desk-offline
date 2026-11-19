@@ -18,6 +18,8 @@ import { initAndroid } from '@/lib/android'
 import { repairAttendance } from '@/db/attendance'
 import { purgeOrphanBlobs } from '@/db/files'
 import { Startup } from '@/components/Startup'
+import { prepareOffline } from '@/lib/offline'
+import { isChatGPTLocalWindow } from '@/lib/chatgpt'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
@@ -50,10 +52,8 @@ async function boot() {
   const native = Boolean(
     (globalThis as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor?.isNativePlatform?.(),
   )
-  if (!native && 'serviceWorker' in navigator && import.meta.env.PROD) {
-    void navigator.serviceWorker.register('sw.js', { scope: './' }).catch(() => {
-      /* offline still works from IndexedDB; the worker is a bonus */
-    })
+  if (!native && !isChatGPTLocalWindow() && 'serviceWorker' in navigator && import.meta.env.PROD) {
+    void prepareOffline()
   }
 
   // after paint: pull yesterday's unfinished work forward, then refresh the

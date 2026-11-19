@@ -45,7 +45,7 @@ try {
   await run('Calculators', [resolve(output, 'calculators.cjs')])
   await run('AI server contracts', ['--test', 'server/test.mjs'])
   await run('ChatGPT bridge contracts', ['--test', 'scripts/chatgpt-local/test.mjs'])
-  for (const script of ['render-recovery-test', 'planner-reminder-regression', 'backup-regression', 'offline-data-regression', 'improvement-regression', 'ai-notes-data-test', 'notes-quality-eval', 'remaining-milestones-data-test', 'quality-reviews-data-test', 'native-export-test', 'native-ocr-test']) await run(script, [`scripts/${script}.mjs`])
+  for (const script of ['render-recovery-test', 'planner-reminder-regression', 'backup-regression', 'offline-data-regression', 'improvement-regression', 'ai-notes-data-test', 'notes-quality-eval', 'remaining-milestones-data-test', 'quality-reviews-data-test', 'native-export-test', 'native-ocr-test', 'offline-retry-data-test']) await run(script, [`scripts/${script}.mjs`])
   if (!core) {
     await startServer(5173, false); await startServer(4173, true)
     const scripts = [
@@ -57,6 +57,7 @@ try {
       ['math-render-browser-test', 'dev'], ['install-test', 'preview'], ['offline-test', 'preview'],
       ['flow-test', 'preview'], ['mobile-audit', 'preview'], ['chatgpt-local/browser-test', 'preview'],
       ['release-ui-test', 'preview'],
+      ['offline-retry-ui-test', 'preview'],
     ]
     for (const [script, mode] of scripts) {
       const url = `http://127.0.0.1:${mode === 'dev' ? 5173 : 4173}`

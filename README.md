@@ -2,7 +2,7 @@
 
 <p align="center"><a href="https://playxgaming.github.io/semester-desk-offline/"><strong>Open the app ↗</strong></a> · <a href="https://github.com/playxgaming/semester-desk-offline/releases/latest"><strong>Download Android ↗</strong></a> · <a href="docs/USER_GUIDE.md"><strong>Full usage guide</strong></a></p>
 
-<p align="center"><a href="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml"><img alt="Release verification" src="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml/badge.svg"></a> <img alt="Version 3.0.1" src="https://img.shields.io/badge/version-3.0.1-27654b"> <img alt="Offline first" src="https://img.shields.io/badge/offline-first-3e785d"> <img alt="Web and Android" src="https://img.shields.io/badge/web_%2B-Android-4b70a1"> <img alt="No account required" src="https://img.shields.io/badge/account-not_required-80612b"></p>
+<p align="center"><a href="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml"><img alt="Release verification" src="https://github.com/playxgaming/semester-desk-offline/actions/workflows/release.yml/badge.svg"></a> <img alt="Version 3.0.2" src="https://img.shields.io/badge/version-3.0.2-27654b"> <img alt="Offline first" src="https://img.shields.io/badge/offline-first-3e785d"> <img alt="Web and Android" src="https://img.shields.io/badge/web_%2B-Android-4b70a1"> <img alt="No account required" src="https://img.shields.io/badge/account-not_required-80612b"></p>
 
 **One local workspace for classes, notes, revision, planning and student life.** Semester Desk is an offline-first React PWA and signed Android sideload app. Your study data and files live on your device. No account, remote database or background sync is required.
 

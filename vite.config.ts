@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath, URL } from 'node:url'
-import { cpSync, mkdirSync, readdirSync } from 'node:fs'
+import { cpSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
 
 // Ship PDF.js workers, character maps and fonts with the app, including offline.
 const pdfAssets = fileURLToPath(new URL('./public/pdfjs/', import.meta.url))
@@ -12,11 +12,15 @@ for (const folder of ['cmaps', 'standard_fonts', 'wasm']) cpSync(`${pdfPackage}$
 cpSync(`${pdfPackage}legacy/build/pdf.worker.min.mjs`, `${pdfAssets}pdf.worker.min.mjs`)
 cpSync(`${pdfPackage}LICENSE`, `${pdfAssets}LICENSE`)
 
-// OCR has no CDN fallback: workers, compatible LSTM cores and English data are local.
+// OCR has no CDN fallback: the worker, portable LSTM core and English data are local.
 const ocrAssets = fileURLToPath(new URL('./public/ocr/', import.meta.url))
 const ocrCore = fileURLToPath(new URL('./node_modules/tesseract.js-core/', import.meta.url))
 mkdirSync(`${ocrAssets}core`, { recursive: true }); mkdirSync(`${ocrAssets}lang`, { recursive: true })
-for (const file of readdirSync(ocrCore).filter(name => name.endsWith('lstm.wasm.js') || name === 'LICENSE')) cpSync(`${ocrCore}${file}`, `${ocrAssets}core/${file}`)
+// One portable LSTM core works across supported browsers without downloading
+// three architecture variants. Only remove this producer's old generated files.
+for (const file of readdirSync(`${ocrAssets}core`).filter(name => /^tesseract-core-(?:simd-|relaxedsimd-)?lstm\.wasm\.js$/.test(name))) unlinkSync(`${ocrAssets}core/${file}`)
+cpSync(`${ocrCore}tesseract-core-lstm.wasm.js`, `${ocrAssets}core/portable-lstm.wasm.js`)
+cpSync(`${ocrCore}LICENSE`, `${ocrAssets}core/LICENSE`)
 cpSync(fileURLToPath(new URL('./node_modules/tesseract.js/dist/worker.min.js', import.meta.url)), `${ocrAssets}worker.min.js`)
 cpSync(fileURLToPath(new URL('./node_modules/tesseract.js/dist/worker.min.js.LICENSE.txt', import.meta.url)), `${ocrAssets}LICENSE-worker.txt`)
 cpSync(fileURLToPath(new URL('./node_modules/tesseract.js/LICENSE.md', import.meta.url)), `${ocrAssets}LICENSE-tesseract.md`)

@@ -1,7 +1,7 @@
 {
   "name": "semester-desk",
   "private": true,
-  "version": "3.0.1",
+  "version": "3.0.2",
   "type": "module",
   "description": "Offline-first PWA for the whole semester: courses, timetable, attendance, deadlines, grades, spaced repetition and a load-aware study planner.",
   "scripts": {

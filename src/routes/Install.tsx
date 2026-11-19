@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { Link } from 'react-router-dom'
 import { Capacitor } from '@capacitor/core'
 import { APK_URL, APP_VERSION, RELEASES_URL } from '@/lib/release'
+import { getOfflineStatus, OFFLINE_STATUS_EVENT, prepareOffline } from '@/lib/offline'
 import { CheckCircle2, Download, ExternalLink, Monitor, Share2, ShieldCheck, Smartphone, WifiOff } from 'lucide-react'
 import { Badge, Button, Card, Note, PageHeader } from '@/components/ui'
 
@@ -95,12 +96,16 @@ export default function Install() {
   const localConnector = window.location.origin === 'http://127.0.0.1:4768'
   const native = Capacitor.isNativePlatform()
   const [offlineReady, setOfflineReady] = useState(false)
+  const [offlineStatus, setOfflineStatus] = useState(getOfflineStatus)
 
   useEffect(() => {
     let active = true
     const update = () => setOnline(navigator.onLine)
     window.addEventListener('online', update)
     window.addEventListener('offline', update)
+    const offlineChanged = () => setOfflineStatus(getOfflineStatus())
+    window.addEventListener(OFFLINE_STATUS_EVENT, offlineChanged)
+    offlineChanged()
     if (!localConnector && !native && 'serviceWorker' in navigator) {
       void navigator.serviceWorker.ready.then(() => {
         if (active) setOfflineReady(true)
@@ -110,6 +115,7 @@ export default function Install() {
       active = false
       window.removeEventListener('online', update)
       window.removeEventListener('offline', update)
+      window.removeEventListener(OFFLINE_STATUS_EVENT, offlineChanged)
     }
   }, [localConnector, native])
 
@@ -131,7 +137,7 @@ export default function Install() {
               <Badge tone="ok"><ShieldCheck size={12} /> No account needed</Badge>
               <Badge tone={offlineReady || native ? 'ok' : 'neutral'}>
                 <WifiOff size={12} />
-                {native ? 'Offline app assets installed' : localConnector ? 'Local connector required' : offlineReady ? 'Offline cache ready' : online ? 'Preparing offline access' : 'Open online to prepare offline access'}
+                {native ? 'Offline app assets installed' : localConnector ? 'Local connector required' : offlineReady || offlineStatus === 'ready' ? 'Offline cache ready' : offlineStatus === 'error' ? 'Offline setup needs retry' : online ? 'Preparing offline access' : 'Open online to prepare offline access'}
               </Badge>
             </div>
             <h2 className="text-[23px]">Semester Desk <span className="text-sm text-ink-3">v{APP_VERSION}</span></h2>
@@ -152,6 +158,8 @@ export default function Install() {
         </div>
         {message ? <p role="status" className="border-t border-rule px-5 py-3 text-[13.5px] text-ink-2 sm:px-7">{message}</p> : null}
       </Card>
+
+      {!native && !localConnector && offlineStatus === 'error' && <Card className="mt-4 p-4"><p role="alert" className="text-sm">Some offline files could not download. Your saved records are unchanged. Check your connection, keep the app open and retry.</p><Button className="mt-2" disabled={!online} onClick={() => void prepareOffline()}>Retry offline setup</Button></Card>}
 
       <div id="install-instructions" className="mt-6 grid scroll-mt-6 gap-4 lg:grid-cols-2">
         <Card className="p-5">

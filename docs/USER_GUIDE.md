@@ -8,7 +8,7 @@ All screenshots below show the built-in demo semester in a disposable browser pr
 
 ## Start in ten minutes
 
-1. Open the website or install the signed APK. Let the website finish caching before disconnecting.
+1. Open the website or install the signed APK. Let the website finish caching before disconnecting. Interrupted downloads retry automatically; **Install app → Retry offline setup** offers recovery after repeated failures. Keep the app open until it reports **Offline cache ready**.
 2. Complete the setup wizard, or explore the clearly labelled demo first. To use your own data, use **Settings → Reset and start empty**, then add your profile and courses. Export any work you want to keep before resetting.
 3. Set your term dates, current semester, grading scheme, daily study capacity and attendance target in Settings.
 4. Add courses, then import or enter your timetable and syllabus.
