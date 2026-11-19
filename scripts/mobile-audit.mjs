@@ -93,7 +93,10 @@ for (const width of [360, 390]) {
     })
 
     const flags = []
-    if (audit.overflow > 0) flags.push(`OVERFLOW ${audit.overflow}px ${audit.wide.join(' | ')}`)
+    if (audit.overflow > 0) {
+      flags.push(`OVERFLOW ${audit.overflow}px ${audit.wide.join(' | ')}`)
+      await p.screenshot({ path: `shots/overflow-${width}-${name}.png`, fullPage: true })
+    }
     if (audit.small.length) flags.push(`SMALL ${audit.small.join(' | ')}`)
     if (flags.length) problems.push(`  ${name}: ${flags.join(' ;; ')}`)
     console.log(`${name.padEnd(13)} ${audit.overflow === 0 ? 'ok' : 'OVERFLOW'}  h1=${JSON.stringify(audit.h1)}`)

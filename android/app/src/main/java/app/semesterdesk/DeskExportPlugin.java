@@ -53,7 +53,7 @@ public class DeskExportPlugin extends Plugin {
         // A WebView reload can abandon preparation before the picker opens.
         // Only private staging is replaced; the student's records are untouched.
         if (staged != null) clear();
-        Long size = call.getLong("size");
+        Integer size = call.getInt("size");
         if (size == null || size < 0 || size > 128L * 1024 * 1024) { call.reject("Invalid export size (maximum 128 MB)."); return; }
         if (size + 2097152L > getContext().getCacheDir().getUsableSpace()) { call.reject("Not enough device space to prepare this export."); return; }
         title = call.getString("name", "semester-desk-export").replaceAll("[\\\\/\\p{Cntrl}]", "_");

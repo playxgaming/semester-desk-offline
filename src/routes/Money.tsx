@@ -403,7 +403,7 @@ export default function Money() {
             <ul className="space-y-4">
               {burn.map((b) => (
                 <li key={b.category}>
-                  <div className="mb-1 flex items-baseline gap-2">
+                  <div className="mb-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
                     <b className="text-[13.5px]">{b.category}</b>
                     <span className="font-mono text-[12px] text-ink-3 tabnum">
                       {rupees(b.spent)} / {rupees(b.limit)}
@@ -460,7 +460,7 @@ export default function Money() {
         <Panel title="Where it went" sub={monthLabel(month)}>
           {chartData.length ? (
             <>
-              <div style={{ height: chartData.length * 34 + 36 }}>
+              <div className="min-w-0 max-w-full overflow-hidden" style={{ height: chartData.length * 34 + 36 }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={chartData}
